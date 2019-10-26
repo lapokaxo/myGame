@@ -1,2 +1,0 @@
-# myGame
-Created with CodeSandbox
