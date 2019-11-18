@@ -4,7 +4,6 @@ export default class EndGameScene extends Phaser.Scene {
   constructor() {
     super("end");
   }
-
   preload() {
     this.load.image("endgame", "assets/youdead.png");
   }
@@ -14,7 +13,7 @@ export default class EndGameScene extends Phaser.Scene {
   }
   update() {
     if (this.rKeys.isDown) {
-      this.scene.start("bootGame");
+      this.scene.start("startScene");
     }
   }
 }

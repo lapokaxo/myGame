@@ -11,19 +11,27 @@ export default class Scene extends Phaser.Scene {
       frameWidth: 32,
       frameHeigh: 32
     });
+
     this.load.image("eship1", "assets/enemyship1.png");
     this.load.image("eship2", "assets/enemyship2.png");
+    this.load.spritesheet("eship3", "assets/enemyship3.png", {
+      frameWidth: 32,
+      frameHeigh: 32
+    });
   }
 
   create() {
     this.background = this.add.image(256 / 2, 272 / 2, "bg");
     this.ship = this.physics.add.sprite(256 / 2, 272 / 2, "ship");
-    this.eship1 = this.physics.add.image(220 / 2, 100 / 2, "eship1");
+    this.eship1 = this.physics.add.image(190 / 2, 100 / 2, "eship1");
     this.eship1.flipY = true;
-    this.eship2 = this.physics.add.image(280 / 2, 100 / 2, "eship2");
+    this.eship2 = this.physics.add.image(330 / 2, 100 / 2, "eship2");
     this.eship2.flipY = true;
+    this.eship3 = this.physics.add.image(120 / 2, 100 / 2, "eship3");
+    this.eship3.flipY = true;
     this.KDown = 1;
     this.KDownA = 1;
+    this.KDownB = 1;
     this.anims.create({
       key: "ship_anim",
       frames: this.anims.generateFrameNumbers("ship"),
@@ -34,6 +42,8 @@ export default class Scene extends Phaser.Scene {
     this.keys = this.input.keyboard.createCursorKeys();
     this.rKeys = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
     this.physics.add.overlap(this.ship, this.eship1, this.endgame, null, this);
+    this.physics.add.overlap(this.ship, this.eship2, this.endgame, null, this);
+    this.physics.add.overlap(this.ship, this.eship3, this.endgame, null, this);
   }
 
   update() {
@@ -73,9 +83,11 @@ export default class Scene extends Phaser.Scene {
       this.ship.x = this.ship.x = 272 / 2;
     }
 
-    this.KDown = this.MoveShip(this.KDown, this.eship1, 1);
+    this.KDown = this.MoveShip(this.KDown, this.eship1, 3);
 
-    this.KDownA = this.MoveShip(this.KDownA, this.eship2, 1);
+    this.KDownA = this.MoveShip(this.KDownA, this.eship2, 2.1);
+
+    this.KDownB = this.MoveShip(this.KDownB, this.eship3, 3.5);
   }
 
   MoveShip(KDown, eship, speed) {
