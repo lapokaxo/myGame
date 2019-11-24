@@ -18,6 +18,7 @@ export default class Scene extends Phaser.Scene {
       frameWidth: 32,
       frameHeigh: 32
     });
+    this.load.image("eship4", "assets/enemyship4.png");
   }
 
   create() {
@@ -29,9 +30,12 @@ export default class Scene extends Phaser.Scene {
     this.eship2.flipY = true;
     this.eship3 = this.physics.add.image(120 / 2, 100 / 2, "eship3");
     this.eship3.flipY = true;
+    this.eship4 = this.physics.add.image(400 / 2, 100 / 2, "eship4");
+    this.eship4.flipY = true;
     this.KDown = 1;
     this.KDownA = 1;
     this.KDownB = 1;
+    this.KDownC = 1;
     this.anims.create({
       key: "ship_anim",
       frames: this.anims.generateFrameNumbers("ship"),
@@ -44,6 +48,7 @@ export default class Scene extends Phaser.Scene {
     this.physics.add.overlap(this.ship, this.eship1, this.endgame, null, this);
     this.physics.add.overlap(this.ship, this.eship2, this.endgame, null, this);
     this.physics.add.overlap(this.ship, this.eship3, this.endgame, null, this);
+    this.physics.add.overlap(this.ship, this.eship4, this.endgame, null, this);
   }
 
   update() {
@@ -83,11 +88,13 @@ export default class Scene extends Phaser.Scene {
       this.ship.x = this.ship.x = 272 / 2;
     }
 
-    this.KDown = this.MoveShip(this.KDown, this.eship1, 3);
+    this.KDown = this.MoveShip(this.KDown, this.eship1, 2.5);
 
     this.KDownA = this.MoveShip(this.KDownA, this.eship2, 2.1);
 
     this.KDownB = this.MoveShip(this.KDownB, this.eship3, 3.5);
+
+    this.KDownC = this.MoveShip(this.KDownC, this.eship4, 3);
   }
 
   MoveShip(KDown, eship, speed) {
